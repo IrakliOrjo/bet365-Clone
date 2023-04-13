@@ -1,20 +1,24 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import Main from './components/Main'
+import Home from './Home.js'
+
 
 import './index.css';
 
 function App() {
   return (
-    <div className="bg-black min-h-screen flex flex-col">
-      <Header />
-      <div className='flex'>
-      <Sidebar />
-      <Main />
-      </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    
       {/* Match details*/}
 
-    </div>
+    
+    </Routes>
+    </BrowserRouter>
   );
 }
 
