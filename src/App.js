@@ -29,7 +29,7 @@ function App() {
     <BrowserRouter>
     <div className="bg-black min-h-screen flex flex-col">
        {/*FIXED LOGIN*/}
-       {showFixedDiv && <div className='fixed flex flex-col p-6 brightness-100 top-[23%] w-[25em] bg-slate-300 left-[11%]
+       {showFixedDiv && <div className='fixed flex flex-col p-6 brightness-100 top-[23%] w-[20em] md:w-[25em] bg-slate-300 left-[17%]
        sm:left-[20%] md:left-[32%] xl:left-[39%]'>
             <input className='bg-zinc-50 border pl-2 border-gray-500 mb-2 py-2' placeholder='Username'  type='mail' />
             <input className='bg-zinc-50 border pl-2 mb-2 border-gray-500 py-2' placeholder='Password' type='password' />

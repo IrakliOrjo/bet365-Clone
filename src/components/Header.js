@@ -61,32 +61,32 @@ const Header = (props) => {
         <div className='flex gap-3 bg-[#3a3939] py-1 w-full justify-center md:hidden'>
             <div className='cursor-pointer hover:brightness-75'>
                 <GiSoccerBall className='text-white text-[2rem] ml-2' />
-            <p className='text-white font-semibold'>Soccer</p>
+            <p className='text-white text-[.9rem] font-semibold'>Soccer</p>
             </div>
             <div className='cursor-pointer hover:brightness-75'>
                 <BiTennisBall className='text-yellow-500 text-[2rem] ml-2' />
-            <p className='text-white font-semibold'>Tennis</p>
+            <p className='text-white text-[.9rem] font-semibold'>Tennis</p>
             </div>
             <div className='cursor-pointer hover:brightness-75'>
                 <BiBasketball className='text-amber-700 text-[2rem] ml-4' />
-            <p className='text-white font-semibold'>Basketball</p>
+            <p className='text-white text-[.9rem] font-semibold'>Basketball</p>
             </div>
             <div className='cursor-pointer hover:brightness-75'>
                 <MdCasino className='text-red-700 text-[2rem] ml-2' />
-            <p className='text-white font-semibold'>Casino</p>
+            <p className='text-white text-[.9rem] font-semibold'>Casino</p>
             </div>
             
             <div className='cursor-pointer hover:brightness-75'>
                 <GiCricketBat className='text-amber-400 text-[2rem] ml-2' />
-            <p className='text-white font-semibold'>Cricket</p>
+            <p className='text-white text-[.9rem] font-semibold'>Cricket</p>
             </div>
             <div className='cursor-pointer hover:brightness-75'>
                 <MdSportsEsports className='text-cyan-400 text-[2rem] ml-2' />
-            <p className='text-white font-semibold'>Esports</p>
+            <p className='text-white text-[.9rem] font-semibold'>Esports</p>
             </div>
             <div className='cursor-pointer hover:brightness-75'>
                 <MdSportsRugby className='text-amber-900 text-[2rem] ml-2' />
-            <p className='text-white font-semibold'>Rugby</p>
+            <p className='text-white text-[.9rem] font-semibold'>Rugby</p>
             </div>
         </div>
     </div>

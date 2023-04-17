@@ -33,7 +33,9 @@ const Sport = (props) => {
                     <p className='text-[.7rem] text-[#b8b6b6]'>Bet Boosts are available on selected sports, these are located within the classification and marked with a green arrow.</p>
                     <p className='text-[.7rem] text-[#b8b6b6]'>Availability may be withdrawn at the discraction of website.</p>
                 </div>
-                <img className='object-cover' src={bet3} />
+                <div>
+                <img className='object-cover w-full' src={bet3} />
+                </div>
             </div>
             <div className='w-full border-t-[1px] text-center p-3 border-b-2 border-b-green-700 border-t-[#777575] bg-[#444242]'>
                 <p className='text-white text-[.8rem] 
