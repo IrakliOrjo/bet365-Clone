@@ -31,7 +31,7 @@ const Match = (props) => {
         props.setInPlayState(false)
     }
 
- 
+    const fixedDivRef = useRef(null);
 
 
 
@@ -65,7 +65,7 @@ const Match = (props) => {
                 <AiOutlineArrowDown className='text-[#797878]' />
                 </div>
             </div>
-            <div className='h-11 flex'>
+            <div className='min-h-11 flex'>
                 <div  className='basis-[100%] h-full text-white px-6 hover:bg-[#666464]'>
                     <p onClick={props.handleClick} className='mt-2'>{currentGame[0].home} <span
                     className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].homeOdd}</span></p>

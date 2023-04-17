@@ -24,7 +24,7 @@ const Header = (props) => {
 
   return (
     <div className='flex flex-col'>
-        <div className='hidden md:flex py-3 px-[14em] bg-[#1f1e1e] justify-between'>
+        <div className='hidden md:flex py-3 px-[12em] bg-[#1f1e1e] justify-between'>
         <div className=''>
             <ul className='flex text-[0.8rem] gap-8'>
                 <li className={`text-[#7a7979] ${props.sportState ? 'text-white' : 'text-[#7a7979]'} hover:text-white cursor-pointer`}>Sport</li>
