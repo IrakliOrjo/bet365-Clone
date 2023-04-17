@@ -6,22 +6,71 @@ import {FaHockeyPuck,FaTableTennis,FaVolleyballBall} from 'react-icons/fa'
 import {RiBilliardsFill} from 'react-icons/ri'
 import {CgGames} from 'react-icons/cg'
 
+import { useState } from 'react'
+import {games} from './data.js'
+
+import { Link } from "react-router-dom"
 
 
 
 
 
-const Sidebar = () => {
+
+const Sidebar = (props) => {
+
+    const [soccer, setSoccer] = useState(false)
+    const [soccerLeague, setSoccerLeague] = useState(false)
+
+    const uniqueLeagues = [...new Set(games.map(item => item.league))];
+
+    const goInPlay = () => {
+        console.log('clicked')
+        props.setSportState(false)
+        props.setInPlayState(true)
+    }
+
   return (
-    <div className='flex flex-col bg-[#2b2a2a] h-[870px] w-[16%] overflow-hidden overflow-y-scroll'>
+    <div className=' flex-col bg-[#2b2a2a] h-[870px] hidden md:flex min-w-[20%] overflow-hidden overflow-y-scroll'>
         <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
             <AiTwotoneStar className='text-yellow-400 mt-1 mr-1 w-6 inline-block' />
             <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Favourites</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className={`flex border-b-2 ${soccer ? "border-green-800" : "border-gray-600"}  cursor-pointer 
+        hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]`}
+        onClick={()=> setSoccer(!soccer)}
+        >
             <BiFootball className='text-white mt-1 mr-1 w-6 inline-block' />
             <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Soccer</p>
         </div>
+        {soccer && uniqueLeagues.map(league => {
+            if(league){
+                return (
+        <div className='flex border-b-[1px] border-gray-700 cursor-pointer
+         hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[2.8em]'
+         onClick={()=> setSoccerLeague(!soccerLeague)}
+         >
+            
+            <p className='text-gray-300 text-[0.8rem] mt-1 font-semibold'>{league}</p>
+        </div>
+            )
+            }
+            
+        })
+        }
+         {soccer && soccerLeague && games.map(game =>{
+            if(game){
+                return (
+                    <div key={game.id} className='flex flex-col border-b-[1px] border-gray-700 cursor-pointer
+         hover:bg-[#5f5d5d] justify-start px-11 min-h-[2.8em]'>
+            <Link onClick={goInPlay} to={`/match/${game.id}`}>
+                        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.home}</p>
+                        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.away}</p>
+            </Link>
+                    </div>
+                )
+            }
+        })}
+
         <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
             <BiTennisBall className='text-yellow-300 mt-1 mr-1 w-6 inline-block' />
             <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Tennis</p>
