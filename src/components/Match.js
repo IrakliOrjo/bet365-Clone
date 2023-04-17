@@ -1,6 +1,6 @@
 import {AiOutlineStar, AiOutlineArrowDown} from 'react-icons/ai'
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import {games} from './data.js'
 
@@ -31,6 +31,10 @@ const Match = (props) => {
         props.setInPlayState(false)
     }
 
+ 
+
+
+
   return (
     <div className='flex flex-col-reverse xl:flex-row'>
     <div className='bg-[#313030] flex flex-col w-[32em] md:w-[37em]  xl:w-[44em] overflow-hidden overflow-y-scroll'>
@@ -51,6 +55,7 @@ const Match = (props) => {
                 </ul>
             </div>
         </div>
+           
         {/*Odds divs begin */}
         <div className='flex flex-col cursor-pointer border-t-2 border-green-800  bg-[#474646]'>
             <div className='h-11 flex px-6 justify-between items-center border-b-[1px] group border-[#807f7f]'>
@@ -61,20 +66,23 @@ const Match = (props) => {
                 </div>
             </div>
             <div className='h-11 flex'>
-                <div className='basis-[100%] h-full text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'>{currentGame[0].home} <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].homeOdd}</span></p>
+                <div  className='basis-[100%] h-full text-white px-6 hover:bg-[#666464]'>
+                    <p onClick={props.handleClick} className='mt-2'>{currentGame[0].home} <span
+                    className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].homeOdd}</span></p>
+                </div>
+                <div  className='basis-[100%] h-full text-white px-6 hover:bg-[#666464]'>
+                    <p onClick={props.handleClick} className='mt-2'>Draw <span 
+                    className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].draw}</span></p>
                 </div>
                 <div className='basis-[100%] h-full text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'>Draw <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].draw}</span></p>
-                </div>
-                <div className='basis-[100%] h-full text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'>{currentGame[0].away} <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].awayOdd}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'>{currentGame[0].away} <span 
+                     className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].awayOdd}</span></p>
                 </div>
             </div>
         </div>
         <div className='flex flex-col cursor-pointer border-t-2 border-green-800  bg-[#474646]'>
             <div className='h-11 flex px-6 justify-between items-center border-b-[1px] group border-[#807f7f]'>
-                <p className='text-white font-bold hover:text-green-400'>Double Chance</p>
+                <p onClick={props.handleClick} className='text-white font-bold hover:text-green-400'>Double Chance</p>
                 <div className='flex invisible group-hover:visible gap-8'>
                 <AiOutlineStar className='text-[#797878] hover:text-[#c9c4c4] ' />
                 <AiOutlineArrowDown className='text-[#797878]' />
@@ -82,13 +90,13 @@ const Match = (props) => {
             </div>
             <div className='min-h-11 flex'>
                 <div className='basis-[100%] h-full text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'>{currentGame[0].home} or Draw <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].homeX}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'>{currentGame[0].home} or Draw <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].homeX}</span></p>
                 </div>
                 <div className='basis-[100%] h-full text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'>{currentGame[0].home} or {currentGame[0].away} <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].oneTwo}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'>{currentGame[0].home} or {currentGame[0].away} <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].oneTwo}</span></p>
                 </div>
                 <div className='basis-[100%] h-full text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'>{currentGame[0].away} or Draw <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].awayX}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'>{currentGame[0].away} or Draw <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].awayX}</span></p>
                 </div>
             </div>
         </div>
@@ -109,10 +117,10 @@ const Match = (props) => {
                     <p className='mt-2'>2.5</p>
                 </div>
                 <div className='basis-[100%] h-full text-white px-6 text-center hover:bg-[#666464]'>
-                    <p className='mt-2'> <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].overTwo}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'> <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].overTwo}</span></p>
                 </div>
                 <div className='basis-[100%] h-full text-center text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'><span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].underTwo}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'><span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].underTwo}</span></p>
                 </div>
             </div>
         </div>
@@ -133,10 +141,10 @@ const Match = (props) => {
                     <p className='mt-2'>0.5</p>
                 </div>
                 <div className='basis-[100%] h-full text-white px-6 text-center hover:bg-[#666464]'>
-                    <p className='mt-2'> <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].overZero}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'> <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].overZero}</span></p>
                 </div>
                 <div className='basis-[100%] h-full text-center text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'><span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].underZero}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'><span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].underZero}</span></p>
                 </div>
             </div>
             <div className='h-11 flex border-b-[1px] border-[#666565]'>
@@ -144,10 +152,10 @@ const Match = (props) => {
                     <p className='mt-2'>1.5</p>
                 </div>
                 <div className='basis-[100%] h-full text-white px-6 text-center hover:bg-[#666464]'>
-                    <p className='mt-2'> <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].overOne}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'> <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].overOne}</span></p>
                 </div>
                 <div className='basis-[100%] h-full text-center text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'><span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].underOne}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'><span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].underOne}</span></p>
                 </div>
             </div>
             <div className='h-11 flex border-b-[1px] border-[#666565]'>
@@ -155,10 +163,10 @@ const Match = (props) => {
                     <p className='mt-2'>3.5</p>
                 </div>
                 <div className='basis-[100%] h-full text-white px-6 text-center hover:bg-[#666464]'>
-                    <p className='mt-2'> <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].overThree}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'> <span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].overThree}</span></p>
                 </div>
                 <div className='basis-[100%] h-full text-center text-white px-6 hover:bg-[#666464]'>
-                    <p className='mt-2'><span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].underThree}</span></p>
+                    <p onClick={props.handleClick} className='mt-2'><span className='text-yellow-300 ml-1 text-[.9rem]'>{currentGame[0].underThree}</span></p>
                 </div>
             </div>
         </div>
