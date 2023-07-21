@@ -1,5 +1,7 @@
 import React from 'react'
 
+import {Link} from 'react-router-dom'
+
 import bh from '../img/bh.png'
 import bj from '../img/bj.png'
 import im from '../img/im.png'
@@ -9,11 +11,20 @@ import tp from '../img/tp.png'
 
 import {games} from './data.js'
 
-const FeaturedMatch = () => {
+const FeaturedMatch = (props) => {
+
+
+    const goInPlay = () => {
+        console.log('clicked')
+        props.setSportState(false)
+        props.setInPlayState(true)
+    }
+
   return (
     <div className='flex px-6 bg-[#7c797963] flex-col '>
         <p className='text-[#09d6aa] my-4 font-bold'>Featured Matches</p>
         <div className='flex flex-col justify-center w-full items-center md:flex-row md:justify-evenly md:gap-4'>
+            <Link onClick={goInPlay} to={`/match/${games[0].id}`}>
             <div className='bg-[#646262] mb-4 basis-[100%] w-[18em] h-[9em] rounded-md text-center max-w-[18em]'>
                 <p className='text-[.8rem] text-[#cec7c7]'>Today 22:00</p>
                 <p className='text-white text-[.8rem] font-bold'>V</p>
@@ -28,6 +39,8 @@ const FeaturedMatch = () => {
                         <p className='text-white mt-4 hover:bg-[#a09d9d] cursor-pointer w-full h-full text-[.90rem]'>2 <span className='text-yellow-400'>{games[0].awayOdd}</span></p>
                     </div>
             </div>
+                </Link>
+                 <Link onClick={goInPlay} to={`/match/${games[1].id}`}>
             <div className='bg-[#646262] mb-4 basis-[100%] w-[18em] h-[9em] rounded-md text-center max-w-[18em]'>
                 <p className='text-[.8rem] text-[#cec7c7]'>Today 22:00</p>
                 <p className='text-white text-[.8rem] font-bold'>V</p>
@@ -42,6 +55,8 @@ const FeaturedMatch = () => {
                         <p className='text-white my-4 hover:bg-[#a09d9d] cursor-pointer w-full h-full text-[.90rem]'>2 <span className='text-yellow-400'>{games[1].awayOdd}</span></p>
                     </div>
             </div>
+            </Link>
+            <Link onClick={goInPlay} to={`/match/${games[2].id}`}>
             <div className='bg-[#646262] mb-4 basis-[100%] w-[18em] h-[9em] rounded-md text-center max-w-[18em]'>
                 <p className='text-[.8rem] text-[#cec7c7]'>Today 22:00</p>
                 <p className='text-white text-[.8rem] font-bold'>V</p>
@@ -56,6 +71,7 @@ const FeaturedMatch = () => {
                         <p className='text-white my-4 hover:bg-[#a09d9d] cursor-pointer w-full h-full text-[.90rem]'>2 <span className='text-yellow-400'>{games[2].awayOdd}</span></p>
                     </div>
             </div>
+        </Link>
         </div>  
         <div>
             <p className='text-[#09d6aa] my-4 font-bold'>Instant Games</p>

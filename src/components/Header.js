@@ -24,7 +24,7 @@ const Header = (props) => {
 
   return (
     <div className='flex flex-col'>
-        <div className='hidden md:flex py-3 px-[12em] bg-[#1f1e1e] justify-between'>
+        <div className='hidden md:flex py-3 px-[4em] bg-[#1f1e1e] justify-between'>
         <div className=''>
             <ul className='flex text-[0.8rem] gap-8'>
                 <li className={`text-[#7a7979] ${props.sportState ? 'text-white' : 'text-[#7a7979]'} hover:text-white cursor-pointer`}>Sport</li>
@@ -39,7 +39,7 @@ const Header = (props) => {
             <a className='text-[#7a7979] hover:text-white cursor-pointer'>Help</a>
         </div>
         </div>
-        <div className='flex justify-between px-4 md:px-8 lg:px-11 xl:px-56 bg-green-900'>
+        <div className='flex justify-between px-4 md:px-8 lg:px-11 xl:px-11 bg-green-900'>
             <Link onClick={goInPlay} to={'/'}>
             <div className='flex'>
                 <img className='w-16 hidden md:inline-block cursor-pointer ' src={ball} alt='ball logo' />
@@ -50,12 +50,14 @@ const Header = (props) => {
             <div className='flex gap-4 md:gap-11 mt-4'>
                 <a className={`text-white ${props.sportState ? 'border-b-[2px] border-yellow-500' : ''} text-[1rem] hover:text-green-500`} href="#">Sports</a>
                 <a className={`text-white text-[1rem] ${props.inPlayState ? 'border-b-[2px] border-yellow-500' : ''} hover:text-green-500`} href="#">In-Play</a>
+                {props.userLogged && <a onClick={() => props.setShowMyBets(!props.showMyBets)}  className='text-white text-[1rem] cursor-pointer'>My Bets</a>}
             </div>
             <div className='flex gap-4 mt-4'>
                 <BsSearch className='text-white mt-2 w-9 cursor-pointer hover:text-green-500' />
-                <a className='flex ml-3 bg-yellow-400 h-7 cursor-pointer
-                items-center justify-center rounded-sm hover:bg-slate-300 text-[0.8rem] w-11 text-center'>Join</a>
-                <a className='text-[0.85rem] mt-1 text-white hover:text-green-500 cursor-pointer'>Log In</a>
+               {!props.userLogged && <a onClick={() => props.setShowFixedDiv(true)} className='flex ml-3 bg-yellow-400 h-7 cursor-pointer
+                items-center justify-center rounded-sm hover:bg-slate-300 text-[0.8rem] w-11 text-center'>Join</a>}
+               {!props.userLogged &&  <a onClick={() => props.setShowFixedDiv(true)} className='text-[0.85rem] mt-1 text-white hover:text-green-500 cursor-pointer'>Log In</a>}
+               {props.userLogged && <p className='text-white mt-1'>Welcome <span className='text-yellow-400 cursor-pointer uppercase'>{props.user}</span> </p>}
             </div>
         </div>
         <div className='flex gap-3 bg-[#3a3939] py-1 w-full justify-center md:hidden'>

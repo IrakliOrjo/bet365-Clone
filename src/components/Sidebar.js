@@ -19,7 +19,9 @@ import { Link } from "react-router-dom"
 const Sidebar = (props) => {
 
     const [soccer, setSoccer] = useState(false)
+    const [tennis, setTennis] = useState(false)
     const [soccerLeague, setSoccerLeague] = useState(false)
+    const [tennisLeague, setTennisLeague] = useState(false)
 
     const uniqueLeagues = [...new Set(games.map(item => item.league))];
 
@@ -30,106 +32,158 @@ const Sidebar = (props) => {
     }
 
   return (
-    <div className=' flex-col bg-[#2b2a2a] h-[870px] hidden md:flex min-w-[20%] overflow-hidden overflow-y-scroll'>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+    <div className=' flex-col bg-[#222121] h-[870px] hidden sm:flex md:flex lg:flex w-[17em] overflow-hidden overflow-y-scroll'>
+        <div className='flex  cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
             <AiTwotoneStar className='text-yellow-400 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Favourites</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1 '>Favourites</p>
         </div>
-        <div className={`flex border-b-2 ${soccer ? "border-green-800" : "border-gray-600"}  cursor-pointer 
+        <div className={`flex  ${soccer ? "border-green-800" : "border-gray-600"}  cursor-pointer 
         hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]`}
         onClick={()=> setSoccer(!soccer)}
         >
             <BiFootball className='text-white mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Soccer</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Soccer</p>
         </div>
         {soccer && uniqueLeagues.map(league => {
-            if(league){
+            if(league === 'Premier League'){
                 return (
         <div className='flex border-b-[1px] border-gray-700 cursor-pointer
          hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[2.8em]'
          onClick={()=> setSoccerLeague(!soccerLeague)}
          >
             
-            <p className='text-gray-300 text-[0.8rem] mt-1 font-semibold'>{league}</p>
+            <p className='text-gray-200 text-[0.8rem] mt-1 '>{league}</p>
         </div>
             )
             }
             
         })
         }
-         {soccer && soccerLeague && games.map(game =>{
-            if(game){
+         {soccer && soccerLeague && games
+  .filter(game => game.league === 'Premier League')
+  .map(game => (
+    <div key={game.id} className='flex flex-col border-b-[1px] border-gray-700 cursor-pointer hover:bg-[#5f5d5d] justify-start px-11 min-h-[2.8em]'>
+      <Link onClick={goInPlay} to={`/match/${game.id}`}>
+        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.home}</p>
+        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.away}</p>
+      </Link>
+    </div>
+  ))
+}
+{soccer && uniqueLeagues.map(league => {
+            if(league === 'Champions League'){
                 return (
-                    <div key={game.id} className='flex flex-col border-b-[1px] border-gray-700 cursor-pointer
-         hover:bg-[#5f5d5d] justify-start px-11 min-h-[2.8em]'>
-            <Link onClick={goInPlay} to={`/match/${game.id}`}>
-                        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.home}</p>
-                        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.away}</p>
-            </Link>
-                    </div>
-                )
+        <div className='flex border-b-[1px] border-gray-700 cursor-pointer
+         hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[2.8em]'
+         onClick={()=> setSoccerLeague(!soccerLeague)}
+         >
+            
+            <p className='text-gray-200 text-[0.8rem] mt-1 '>{league}</p>
+        </div>
+            )
             }
-        })}
+            
+        })
+        }
+         {soccer && soccerLeague && games
+  .filter(game => game.league === 'Champions League')
+  .map(game => (
+    <div key={game.id} className='flex flex-col border-b-[1px] border-gray-700 cursor-pointer hover:bg-[#5f5d5d] justify-start px-11 min-h-[2.8em]'>
+      <Link onClick={goInPlay} to={`/match/${game.id}`}>
+        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.home}</p>
+        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.away}</p>
+      </Link>
+    </div>
+  ))
+}
+ 
 
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div onClick={()=> setTennis(!tennis)}
+        className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <BiTennisBall className='text-yellow-300 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Tennis</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Tennis</p>
+            
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        {tennis && uniqueLeagues.map(league => {
+            if(league === 'Wimbledon'){
+                return (
+        <div className='flex border-b-[1px] border-gray-700 cursor-pointer
+         hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[2.8em]'
+         onClick={()=> setTennisLeague(!tennisLeague)}
+         >
+            
+            <p className='text-gray-200 text-[0.8rem] mt-1 '>{league}</p>
+        </div>
+            )
+            }
+            })
+        }
+         {tennis && tennisLeague && games
+  .filter(game => game.league === 'Wimbledon')
+  .map(game => (
+    <div key={game.id} className='flex flex-col border-b-[1px] border-gray-700 cursor-pointer hover:bg-[#5f5d5d] justify-start px-11 min-h-[2.8em]'>
+      <Link onClick={goInPlay} to={`/match/${game.id}`}>
+        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.home}</p>
+        <p className='text-gray-300 text-[0.9rem] tracking-widest'>{game.away}</p>
+      </Link>
+    </div>
+  ))
+}
+        <div className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <BiBaseball className='text-gray-200 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Baseball</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Baseball</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <BiBasketball className='text-amber-500 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Basketball</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Basketball</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex  cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <GiCurlingStone className='text-gray-500 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Curling</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Curling</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <MdSportsEsports className='text-gray-500 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Esport</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Esport</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex  cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <GiSoccerBall className='text-gray-500 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Floorball</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Floorball</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <MdOutlineSportsVolleyball className='text-yellow-500 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Futsal</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Futsal</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <GiHound className='text-gray-500 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Greyhounds</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Greyhounds</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex  cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <MdOutlineSportsHandball className='text-blue-500 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Handball</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Handball</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex  cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <GiHorseHead className='text-amber-800 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Horse Racing</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Horse Racing</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <FaHockeyPuck className='text-black mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Ice Hockey</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Ice Hockey</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <RiBilliardsFill className='text-black mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Snooker</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Snooker</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <FaTableTennis className='text-blue-600 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Table Tennis</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Table Tennis</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <FaVolleyballBall className='text-yellow-900 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Volleyball</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Volleyball</p>
         </div>
-        <div className='flex border-b-2 border-gray-600 cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.5em]'>
+        <div className='flex  cursor-pointer hover:bg-[#5f5d5d] px-3 justify-start items-center min-h-[3.2em]'>
             <CgGames className='text-green-900 mt-1 mr-1 w-6 inline-block' />
-            <p className='text-gray-300 text-[0.9rem] mt-1 font-semibold'>Virtual Sports</p>
+            <p className='text-gray-200 text-[0.85rem] mt-1'>Virtual Sports</p>
         </div>
         
         

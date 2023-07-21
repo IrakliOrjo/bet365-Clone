@@ -15,13 +15,13 @@ const Sport = (props) => {
     console.log(props.sportState)
 
     const goInPlay = () => {
-        console.log('clicked')
+       
         props.setSportState(false)
         props.setInPlayState(true)
     }
 
   return (
-    <div className='w-[32em] md:w-[40em] xl:w-[65em] lg:w-[75em] max-w-[75em] '>
+    <div className='sm:w-[32em] md:w-[40em] xl:w-[90em] lg:w-[50em] '>
         <div className='w-full flex flex-col'>
             <div className='flex justify-between'>
                 <div className='flex flex-col pl-8 pt-4'>
@@ -91,7 +91,10 @@ const Sport = (props) => {
                     
                 </div>
             </div>
-                <FeaturedMatch />
+                <FeaturedMatch
+                setSportState={props.setSportState}
+                setInPlayState={props.setInPlayState}
+                />
         </div>
     </div>
   )
